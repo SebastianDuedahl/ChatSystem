@@ -6,6 +6,9 @@ import java.util.ArrayList;
 public class ChatServer
 {
     int portNumber = 3333;
+
+    ArrayList<ClientThread> clients = new ArrayList<>();
+
     public static void main(String[] args)
     {
         ChatServer chatServer = new ChatServer();
@@ -23,7 +26,6 @@ public class ChatServer
 
     private void acceptClients(ServerSocket serverSocket)
     {
-        ArrayList<ClientThread> clients = new ArrayList<>();
         while(true)
         {
             try
@@ -41,5 +43,10 @@ public class ChatServer
         }
 
 
+    }
+
+    public ArrayList<ClientThread> getClients()
+    {
+        return clients;
     }
 }
