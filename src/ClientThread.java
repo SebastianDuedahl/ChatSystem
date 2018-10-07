@@ -20,31 +20,33 @@ public class ClientThread extends ChatServer implements Runnable
     {
         try
         {
-            clientOut = new PrintWriter (socket.getOutputStream(), false);
+            clientOut = new PrintWriter(socket.getOutputStream(), false);
             clientIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        while(!socket.isClosed())
-        {
-            String input = clientIn.readLine();
-            if (input != null)
+            while (!socket.isClosed())
             {
-                for (ClientThread client : chatserver.getClients())
+                String input = clientIn.readLine();
+                if (input != null)
                 {
-                    PrintWriter clientOut = client.getClientOut();
-                    if (clientOut != null)
+                    for (ClientThread client : chatserver.getClients())
                     {
-                        clientOut.write(input + "\r\n");
-                        clientOut.flush();
+                        PrintWriter clientOut = client.getClientOut();
+                        if (clientOut != null)
+                        {
+                            clientOut.write(input + "\r\n");
+                            clientOut.flush();
+                        }
                     }
+
                 }
 
             }
+        }
+        catch(IOException e)
+            {
+                e.printStackTrace();
+            }
 
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public PrintWriter getClientOut()
