@@ -33,7 +33,7 @@ public class ClientThread extends ChatServer implements Runnable
                         PrintWriter clientOut = client.getClientOut();
                         if (clientOut != null)
                         {
-                            clientOut.write(input + "\r\n");
+                            clientOut.write(input + "\n");
                             clientOut.flush();
                         }
                     }
