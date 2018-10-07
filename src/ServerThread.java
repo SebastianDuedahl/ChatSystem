@@ -7,7 +7,6 @@ public class ServerThread implements Runnable
 {
     private Socket socket;
     private String userName;
-    private boolean isAlive;
     private final LinkedList <String> messagesToSend;
     private boolean hasMessages =  false;
 
@@ -36,8 +35,6 @@ public class ServerThread implements Runnable
             PrintWriter serverOut = new PrintWriter(socket.getOutputStream(), false);
             InputStream serverInStream = socket.getInputStream();
             Scanner serverIn = new Scanner(serverInStream);
-            // BufferedReader userBr = new BufferedReader(new InputStreamReader(userInStream));
-            // Scanner userIn = new Scanner(userInStream);
 
             while (!socket.isClosed()) {
                 if (serverInStream.available() > 0) {
