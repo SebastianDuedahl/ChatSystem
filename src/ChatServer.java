@@ -12,51 +12,41 @@ public class ChatServer
     public static void main(String[] args)
     {
         ChatServer chatServer = new ChatServer();
-        chatServer.startServer();
 
+        try
+        {
+            ServerSocket serverSocket = new ServerSocket(chatServer.portNumber);
+            chatServer.acceptClients(serverSocket);
+        }
+        catch(IOException ioException)
+        {
+            System.out.println("Could not listen on port: " +chatServer.portNumber);
+        }
     }
 
     private void acceptClients(ServerSocket serverSocket)
     {
-        while (true)
+        while(true)
         {
             try
             {
                 Socket socket = serverSocket.accept();
-                System.out.println("Accepts : " + socket.getRemoteSocketAddress());
                 ClientThread client = new ClientThread(this, socket);
-                Thread thread = new Thread(client);
+                Thread thread = new Thread (client);
                 thread.start();
                 clients.add(client);
-            } catch (IOException e)
+            }
+            catch (IOException e)
             {
                 System.out.println("Accept failed on port: " + portNumber);
             }
         }
 
-
+        
     }
 
-    private void startServer()
+    public ArrayList<ClientThread> getClients()
     {
-        clients = new ArrayList<ClientThread>();
-        ServerSocket serverSocket = null;
-        try
-        {
-            serverSocket = new ServerSocket(portNumber);
-            acceptClients(serverSocket);
-
-        } catch (IOException ioe)
-        {
-            ioe.printStackTrace();
-
-        }
-
-
-
+        return clients;
     }
-    public ArrayList<ClientThread> getClients ()
-{
-    return clients;
-}
 }

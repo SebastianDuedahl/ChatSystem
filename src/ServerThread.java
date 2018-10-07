@@ -36,6 +36,8 @@ public class ServerThread implements Runnable
             PrintWriter serverOut = new PrintWriter(socket.getOutputStream(), false);
             InputStream serverInStream = socket.getInputStream();
             Scanner serverIn = new Scanner(serverInStream);
+            // BufferedReader userBr = new BufferedReader(new InputStreamReader(userInStream));
+            // Scanner userIn = new Scanner(userInStream);
 
             while (!socket.isClosed()) {
                 if (serverInStream.available() > 0) {
