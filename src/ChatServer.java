@@ -31,7 +31,7 @@ public class ChatServer
             try
             {
                 Socket socket = serverSocket.accept();
-                ClientThread client = new ClientThread(socket);
+                ClientThread client = new ClientThread(this, socket);
                 Thread thread = new Thread (client);
                 thread.start();
                 clients.add(client);
