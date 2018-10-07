@@ -6,41 +6,26 @@ import java.util.ArrayList;
 public class ChatServer
 {
     int portNumber = 3333;
+
     ArrayList<ClientThread> clients = new ArrayList<>();
 
     public static void main(String[] args)
     {
         ChatServer chatServer = new ChatServer();
-        chatServer.startServer();
 
-    }
-
-    public ArrayList<ClientThread> getClients()
-    {
-        return clients;
-    }
-
-    private void startServer()
-    {
-
-        ServerSocket serverSocket = null;
         try
         {
-            serverSocket = new ServerSocket(portNumber);
-            acceptClients(serverSocket);
+            ServerSocket serverSocket = new ServerSocket(chatServer.portNumber);
+            chatServer.acceptClients(serverSocket);
         }
-        catch (IOException ioe)
+        catch(IOException ioException)
         {
-                ioe.printStackTrace();
-            System.out.println("Could not listen on port : " + portNumber);
-
+            System.out.println("Could not listen on port: " +chatServer.portNumber);
         }
-
     }
 
     private void acceptClients(ServerSocket serverSocket)
     {
-        System.out.println("Server starts port : " + serverSocket.getLocalSocketAddress());
         while(true)
         {
             try
@@ -58,6 +43,11 @@ public class ChatServer
             }
         }
 
+        
+    }
 
+    public ArrayList<ClientThread> getClients()
+    {
+        return clients;
     }
 }
