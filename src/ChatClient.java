@@ -64,7 +64,7 @@ public class ChatClient
             ex.printStackTrace();
         }
         catch (InterruptedException ex){
-            System.out.println("Interrupted");
+            System.out.println("Interrupted ");
         }
     }
 }
