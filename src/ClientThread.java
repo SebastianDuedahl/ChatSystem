@@ -37,9 +37,7 @@ public class ClientThread extends ChatServer implements Runnable
                             clientOut.flush();
                         }
                     }
-
                 }
-
             }
         }
         catch(IOException e)
